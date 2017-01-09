@@ -21,7 +21,7 @@ func isTheBankClosed(date time.Time) time.Time {
 
 func main() {
 	n := time.Now()
-	//n = time.Date(n.Year(), 4, 24, n.Hour(), n.Minute(), 00, 000000001, n.Location()) // used for testing
+	//n = time.Date(n.Year(), 4, 24, 13, n.Minute(), 00, 000000001, n.Location()) // used for testing
 	var l time.Time
 
 	// If is the 25th or past and the salary is paid it moves the date to next month
@@ -41,13 +41,9 @@ func main() {
 		// Prints as x hours/min/sec
 		diff := l.Sub(n).String()
 		fmt.Printf(diff)
-	} else if l.Sub(n).Hours() <= 48 {
-		// Prints as x Day
-		diff := l.Sub(n).Hours() / 24
-		fmt.Printf("%.0f Day!", diff)
 	} else {
 		// Prints as X Days
 		diff := l.Sub(n).Hours() / 24
-		fmt.Printf("%.0f Days", diff)
+		fmt.Print(int(diff)+1, " Days")
 	}
 }
