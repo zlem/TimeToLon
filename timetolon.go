@@ -22,19 +22,13 @@ func isTheBankClosed(date time.Time) time.Time {
 func main() {
 	n := time.Now()
 	//n = time.Date(n.Year(), 4, 24, 13, n.Minute(), 00, 000000001, n.Location()) // used for testing
-	var l time.Time
+	l := isTheBankClosed(time.Date(n.Year(), n.Month(), 25, 00, 00, 00, 000000001, n.Location()))
 
-	// If is the 25th or past and the salary is paid it moves the date to next month
+	// If is the payday or past and the salary is paid it moves the date to next month
 	switch {
-	case n.Day() >= 25:
-		l = time.Date(n.Year(), n.Month(), 25, 00, 00, 00, 000000001, n.Location())
+	case n.Day() >= l.Day():
 		l = l.AddDate(0, 1, 0)
-	default:
-		l = time.Date(n.Year(), n.Month(), 25, 00, 00, 00, 000000001, n.Location())
 	}
-
-	// Runs isTheBackClosed and get the first day before the bank closes
-	l = isTheBankClosed(l)
 
 	//Evaluates how to print the output based on close to salary day
 	if l.Sub(n).Hours() <= 24 {
